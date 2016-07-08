@@ -23,14 +23,46 @@ var fruits=[
 }
 ];
 
-angular.module('cartApp',[])
-.controller('cartCtrl', function($scope){
+
+
+var cartapp=angular.module('cartApp',['ngRoute']);
+//路由功能
+
+cartapp.config(['$routeProvider',function($routeProvider) {
+     $routeProvider
+     .when("/",{
+          template:"<li class='{{fruit.buy?'active':''}}' ng-repeat='fruit in fruits'  item ={{fruit.id}}>\
+                         <p class='contentW'>\
+                              名称：{{fruit.name}}\
+                         </p>\
+                         <p class='contentW'>\
+                              单价：{{fruit.price}}\
+                         </p>\
+                         <p class='contentW'>\
+                              数量：\
+                              <a href='javascript:;' class='calc {{fruit.num<=1?'nobuy':''}}' ng-click='overdue(fruit.id)'>-</a>\
+                              <span>{{fruit.num}}</span>\
+                              <a href='javascript:;' class='calc {{fruit.num>=10?'nobuy':''}}' ng-click='add(fruit.id)'>+</a>\
+                         </p>\
+                         <div class='buttonW'>\
+                              <div class='checkbox'>\
+                                   <input type='checkbox' id='{{fruit.id}}' ng-model='fruit.buy' >\
+                                   <span class='box'></span>\
+                              </div>\
+                              <label class='addc' for='{{fruit.id}}'>添加到购物车</label>\
+                         </div>\
+                    </li>"
+     })
+     
+}]);
+
+cartapp.controller('cartCtrl', function($scope){
      //取出水果
      $scope.fruits = fruits;
 
-     //点击-事件
+     
     
-    
+    //点击- +事件
     $scope.overdue = function(id){
           angular.forEach($scope.fruits, function(value, key){
                if(value.id==id&&value.num>1){
@@ -45,12 +77,10 @@ angular.module('cartApp',[])
                     $scope.fruits[key].num++;
                }
           });
-          // $scope.value.num = $scope.value.num+1;
+          
      }
 
-     // $scope.isBuy = function(buy, $event){
-     //   console.log(buy, $event)
-     // }
+   
 
      $scope.totalPrice = function(){
           $scope.total = 0;

@@ -3,35 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>AngularJS 购物车实例测试</title>
-	<script type="text/javascript" src="http://libs.visualtec.cn/angular1/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
 	<div class="container" ng-app="cartApp" ng-controller="cartCtrl">
 		<div class="wrap">
-			<ul>
-				<li class="{{fruit.buy?'active':''}}" ng-repeat="fruit in fruits"  item ={{fruit.id}}>
-					<p class="contentW">
-						名称：{{fruit.name}}
-					</p>
-					<p class="contentW">
-						单价：{{fruit.price}}
-					</p>
-					<p class="contentW">
-						数量：
-						<a href="javascript:;" class="calc {{fruit.num<=1?'nobuy':''}}" ng-click="overdue(fruit.id)">-</a>
-						<span>{{fruit.num}}</span>
-						<a href="javascript:;" class="calc {{fruit.num>=10?'nobuy':''}}" ng-click="add(fruit.id)">+</a>
-					</p>
-					<div class="buttonW">
-						<div class="checkbox">
-							<input type="checkbox" id="{{fruit.id}}" ng-model="fruit.buy" >
-							<span class="box"></span>
-						</div>
-						<label class="addc" for="{{fruit.id}}">添加到购物车</label>
-					</div>
-				</li>
-				
+			<ul ng-view>
+				<!-- template -->
 			</ul>
 			<div class="price">
 				<p>
