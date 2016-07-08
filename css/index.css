@@ -74,7 +74,7 @@ body{
 	border-radius:0.8rem;
 	transition: all 0.5s;
 }
-.wrap li.active{
+.wrap li.true{
 	border-color:rgb(218, 30, 30);
 }
 .contentW{
@@ -131,4 +131,12 @@ a.calc{
 a.nobuy{
 	border-color: #eee;
 	background-color:#ccc;
+}
+a.submit{
+	display:inline-block;
+	font-size:1.8rem;
+	padding:0.8rem 2rem;
+	background: rgb(218,30,30);
+	color:#fff;
+	border-radius: 4px;
 }

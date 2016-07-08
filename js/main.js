@@ -31,7 +31,7 @@ var cartapp=angular.module('cartApp',['ngRoute']);
 cartapp.config(['$routeProvider',function($routeProvider) {
      $routeProvider
      .when("/",{
-          template:"<li class='{{fruit.buy?'active':''}}' ng-repeat='fruit in fruits'  item ={{fruit.id}}>\
+          template:"<li class='{{fruit.buy}}'  ng-repeat='fruit in fruits'  item ={{fruit.id}}>\
                          <p class='contentW'>\
                               名称：{{fruit.name}}\
                          </p>\
@@ -53,6 +53,11 @@ cartapp.config(['$routeProvider',function($routeProvider) {
                          </div>\
                     </li>"
      })
+     .when("/goBuy",{
+          template:"<div class='buyW'>\
+          <a class='submit' href='#/'>返回</a>\
+          </div>"
+     })
      
 }]);
 
@@ -60,7 +65,7 @@ cartapp.controller('cartCtrl', function($scope){
      //取出水果
      $scope.fruits = fruits;
 
-     
+    
     
     //点击- +事件
     $scope.overdue = function(id){
@@ -80,6 +85,16 @@ cartapp.controller('cartCtrl', function($scope){
           
      }
 
+    // $scope.goBuy = function(event){
+    //  var targetUrl =event.target.innerHTML;
+    //  console.log(targetUrl);
+    //  if(targetUrl =="去结算"){         
+    //       event.target.innerHTML = '提交订单';
+    //       event.target.href="javascript:;";
+    //  }
+
+
+    // }
    
 
      $scope.totalPrice = function(){
@@ -89,7 +104,7 @@ cartapp.controller('cartCtrl', function($scope){
                     $scope.total = $scope.total + value.price*value.num;
                }
           });
-          console.log($scope.total)
+          // console.log($scope.total);
           return $scope.total;
      }
 });
