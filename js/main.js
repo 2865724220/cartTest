@@ -58,7 +58,8 @@ cartapp.config(['$routeProvider',function($routeProvider) {
           template:"\
               <div class='buyW'>\
               <a class='submit' href='#/'>返回</a>\
-              <div ng-repeat='shoplist in bought'>\
+              <h3 class='listTitle'>已选商品列表:</h3>\
+              <div class='bought' ng-repeat='shoplist in bought'>\
                   <span ng-bind-template='{{shoplist.name}}:{{shoplist.price}} x {{shoplist.num}}'></span>\
                   <span ng-bind-template='{{shoplist.price *shoplist.num}}'></span>\
               </div>\
@@ -92,14 +93,15 @@ cartapp.controller('cartCtrl', function($scope){
      };
 
      //将要购买的商品存放在bought中
-     $scope.bought =[];      
     $scope.goBuy = function(event){
      if($scope.total>0){
       event.target.href="#/goBuy";
+      $scope.bought =[];      
       for( var i=0;i<$scope.fruits.length;i++){
         if($scope.fruits[i].buy == true){
           $scope.bought.push($scope.fruits[i]);
-          console.log($scope.bought);
+          // event.target.innerHTML="提交订单;";
+          // console.log($scope.bought);
         }
       }
      }
@@ -107,7 +109,7 @@ cartapp.controller('cartCtrl', function($scope){
       alert("请选择商品");
       event.target.href="#/";
      }
-    }
+    };
    
 
      $scope.totalPrice = function(){

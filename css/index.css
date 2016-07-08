@@ -133,10 +133,33 @@ a.nobuy{
 	background-color:#ccc;
 }
 a.submit{
+	margin-left:2rem;
 	display:inline-block;
-	font-size:1.8rem;
+	font-size:1.2rem;
 	padding:0.8rem 2rem;
 	background: rgb(218,30,30);
 	color:#fff;
 	border-radius: 4px;
+}
+
+.listTitle{
+	width: 32rem;
+	text-align: left;
+	font-size:1.8rem;
+	/*text-align: left;*/
+	padding:1rem 0;
+	margin:0 auto;
+}
+.bought {
+	display: table;
+	font-size: 1.6rem;
+	margin: 3rem auto;
+}
+.bought span {
+display: inline-block;
+width: 16rem;
+height: 2.8rem;
+line-height: 2.8rem;
+text-align: center;
+border-bottom: 1px solid rgb(218, 30, 30);
 }
