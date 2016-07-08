@@ -31,7 +31,7 @@ var cartapp=angular.module('cartApp',['ngRoute']);
 cartapp.config(['$routeProvider',function($routeProvider) {
      $routeProvider
      .when("/",{
-          template:"<li class='{{fruit.buy}}'  ng-repeat='fruit in fruits'  item ={{fruit.id}}>\
+          template:"<ul><li class='{{fruit.buy}}'  ng-repeat='fruit in fruits'  item ={{fruit.id}}>\
                          <p class='contentW'>\
                               名称：{{fruit.name}}\
                          </p>\
@@ -51,12 +51,18 @@ cartapp.config(['$routeProvider',function($routeProvider) {
                               </div>\
                               <label class='addc' for='{{fruit.id}}'>添加到购物车</label>\
                          </div>\
-                    </li>"
+                    </li><ul>\
+                    "
      })
      .when("/goBuy",{
-          template:"<div class='buyW'>\
-          <a class='submit' href='#/'>返回</a>\
-          </div>"
+          template:"\
+              <div class='buyW'>\
+              <a class='submit' href='#/'>返回</a>\
+              <div ng-repeat='shoplist in bought'>\
+                  <span ng-bind-template='{{shoplist.name}}:{{shoplist.price}} x {{shoplist.num}}'></span>\
+                  <span ng-bind-template='{{shoplist.price *shoplist.num}}'></span>\
+              </div>\
+              </div>"
      })
      
 }]);
@@ -74,7 +80,7 @@ cartapp.controller('cartCtrl', function($scope){
                     $scope.fruits[key].num--;
                }
           });
-     }
+     };
 
      $scope.add = function(id){
           angular.forEach($scope.fruits, function(value, key){
@@ -83,18 +89,25 @@ cartapp.controller('cartCtrl', function($scope){
                }
           });
           
+     };
+
+     //将要购买的商品存放在bought中
+     $scope.bought =[];      
+    $scope.goBuy = function(event){
+     if($scope.total>0){
+      event.target.href="#/goBuy";
+      for( var i=0;i<$scope.fruits.length;i++){
+        if($scope.fruits[i].buy == true){
+          $scope.bought.push($scope.fruits[i]);
+          console.log($scope.bought);
+        }
+      }
      }
-
-    // $scope.goBuy = function(event){
-    //  var targetUrl =event.target.innerHTML;
-    //  console.log(targetUrl);
-    //  if(targetUrl =="去结算"){         
-    //       event.target.innerHTML = '提交订单';
-    //       event.target.href="javascript:;";
-    //  }
-
-
-    // }
+     else{
+      alert("请选择商品");
+      event.target.href="#/";
+     }
+    }
    
 
      $scope.totalPrice = function(){

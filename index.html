@@ -9,18 +9,15 @@
 </head>
 <body>
 	<div class="container" ng-app="cartApp" ng-controller="cartCtrl">
-		<div class="wrap">
-			<ul ng-view>
-				<!-- template -->
-			</ul>
-			<div class="price">
-				<p>
-					总价：{{totalPrice()}}
+		<div class="wrap" ng-view>			
 			
-					<a href="#/goBuy">去结算</a>
-				</p>
-			</div>
 		</div>
+		<div class='price'>
+              <p>
+                 总价：{{totalPrice()}}     
+                <a href='#/' ng-click="goBuy($event)">去结算</a>
+                </p>
+        </div>
 		
 	</div>
 </body>
