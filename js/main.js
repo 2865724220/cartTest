@@ -20,6 +20,20 @@ var fruits=[
      num:1,
      buy:false
 }
+// {
+//      id:'fruit4',
+//      name:"菠萝",
+//      price:"18",
+//      num:1,
+//      buy:false
+// },
+// {
+//      id:'fruit5',
+//      name:"西瓜",
+//      price:"18",
+//      num:1,
+//      buy:false
+// }
 ];
 
 
@@ -31,7 +45,7 @@ cartapp.config(['$routeProvider',function($routeProvider) {
   $routeProvider
     .when("/",
       {
-        templateUrl:"views/index.html"
+        templateUrl:"views/index.html",
       })
     .when("/goBuy",{
           templateUrl:"views/order.html"
@@ -39,7 +53,16 @@ cartapp.config(['$routeProvider',function($routeProvider) {
      
 }]);
 
-cartapp.controller('cartCtrl', function($scope,$location){
+cartapp.run(function($rootScope){
+  var price =document.getElementById('price');
+  $rootScope.$on('$viewContentLoaded',function(event){
+    price.style.display="table";
+  });
+
+});
+  
+
+cartapp.controller('cartCtrl', function($scope){
      //取出水果
      $scope.fruits = fruits;
 
