@@ -1,0 +1,9 @@
+
+<div class='buyW'>
+<a class='submit' href='#/'>返回</a>
+<h3 class='listTitle'>已选商品列表:</h3>
+<div class='bought' ng-repeat='shoplist in bought'>
+  <span ng-bind-template='{{shoplist.name}}:{{shoplist.price}} x {{shoplist.num}}'></span>
+  <span ng-bind-template='{{shoplist.price *shoplist.num}}'></span>
+</div>
+</div>

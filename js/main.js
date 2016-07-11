@@ -1,4 +1,3 @@
-
 var fruits=[
 {
      id:'fruit1',
@@ -29,46 +28,18 @@ var cartapp=angular.module('cartApp',['ngRoute']);
 //路由功能
 
 cartapp.config(['$routeProvider',function($routeProvider) {
-     $routeProvider
-     .when("/",{
-          template:"<ul><li class='{{fruit.buy}}'  ng-repeat='fruit in fruits'  item ={{fruit.id}}>\
-                         <p class='contentW'>\
-                              名称：{{fruit.name}}\
-                         </p>\
-                         <p class='contentW'>\
-                              单价：{{fruit.price}}\
-                         </p>\
-                         <p class='contentW'>\
-                              数量：\
-                              <a href='javascript:;' class='calc {{fruit.num<=1?'nobuy':''}}' ng-click='overdue(fruit.id)'>-</a>\
-                              <span>{{fruit.num}}</span>\
-                              <a href='javascript:;' class='calc {{fruit.num>=10?'nobuy':''}}' ng-click='add(fruit.id)'>+</a>\
-                         </p>\
-                         <div class='buttonW'>\
-                              <div class='checkbox'>\
-                                   <input type='checkbox' id='{{fruit.id}}' ng-model='fruit.buy' >\
-                                   <span class='box'></span>\
-                              </div>\
-                              <label class='addc' for='{{fruit.id}}'>添加到购物车</label>\
-                         </div>\
-                    </li><ul>\
-                    "
-     })
-     .when("/goBuy",{
-          template:"\
-              <div class='buyW'>\
-              <a class='submit' href='#/'>返回</a>\
-              <h3 class='listTitle'>已选商品列表:</h3>\
-              <div class='bought' ng-repeat='shoplist in bought'>\
-                  <span ng-bind-template='{{shoplist.name}}:{{shoplist.price}} x {{shoplist.num}}'></span>\
-                  <span ng-bind-template='{{shoplist.price *shoplist.num}}'></span>\
-              </div>\
-              </div>"
+  $routeProvider
+    .when("/",
+      {
+        templateUrl:"views/index.html"
+      })
+    .when("/goBuy",{
+          templateUrl:"views/order.html"
      })
      
 }]);
 
-cartapp.controller('cartCtrl', function($scope){
+cartapp.controller('cartCtrl', function($scope,$location){
      //取出水果
      $scope.fruits = fruits;
 
@@ -91,12 +62,18 @@ cartapp.controller('cartCtrl', function($scope){
           });
           
      };
+    
+
 
      //将要购买的商品存放在bought中
     $scope.goBuy = function(event){
      if($scope.total>0){
       event.target.href="#/goBuy";
-      $scope.bought =[];      
+      $scope.bought =[];
+
+
+
+
       for( var i=0;i<$scope.fruits.length;i++){
         if($scope.fruits[i].buy == true){
           $scope.bought.push($scope.fruits[i]);
@@ -110,7 +87,9 @@ cartapp.controller('cartCtrl', function($scope){
       event.target.href="#/";
      }
     };
-   
+     
+
+
 
      $scope.totalPrice = function(){
           $scope.total = 0;
@@ -122,4 +101,6 @@ cartapp.controller('cartCtrl', function($scope){
           // console.log($scope.total);
           return $scope.total;
      }
+
+
 });
